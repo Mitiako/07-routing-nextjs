@@ -10,20 +10,20 @@ const getHeaders = () => ({
   Authorization: `Bearer ${process.env.NEXT_PUBLIC_NOTEHUB_TOKEN}`,
 });
 
-// Перенесено з ДЗ-6 (06-notehub-nextjs/lib/api.ts)
+// Перенесено з ДЗ-6
 interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
 }
 
-// Перенесено з ДЗ-6 (06-notehub-nextjs/lib/api.ts)
+// Перенесено з ДЗ-6
 interface CreateNoteData {
   title: string;
   content: string;
   tag: NoteTag;
 }
 
-// Перенесено з ДЗ-6 (06-notehub-nextjs/lib/api.ts) (адаптовано)
+// Перенесено з ДЗ-6 (адаптовано)
 // Додано параметр tag для фільтрації нотаток за тегом — нова функціональність ДЗ-7
 // Якщо tag не передати — сервер поверне всі нотатки без фільтрації
 export async function fetchNotes(
@@ -47,7 +47,7 @@ export async function fetchNotes(
   return response.data;
 }
 
-// Перенесено з ДЗ-6 (06-notehub-nextjs/lib/api.ts)
+// Перенесено з ДЗ-6
 // Отримуємо одну нотатку за її id — для сторінки деталей
 export async function fetchNoteById(id: string): Promise<Note> {
   const response = await axios.get<Note>(
@@ -57,7 +57,7 @@ export async function fetchNoteById(id: string): Promise<Note> {
   return response.data;
 }
 
-// Перенесено з ДЗ-6 (06-notehub-nextjs/lib/api.ts)
+// Перенесено з ДЗ-6
 // Створюємо нову нотатку на сервері
 export async function createNote(data: CreateNoteData): Promise<Note> {
   const response = await axios.post<Note>(
@@ -68,7 +68,7 @@ export async function createNote(data: CreateNoteData): Promise<Note> {
   return response.data;
 }
 
-// Перенесено з ДЗ-6 (06-notehub-nextjs/lib/api.ts)
+// Перенесено з ДЗ-6
 // Видаляємо нотатку за її id
 export async function deleteNote(id: string): Promise<Note> {
   const response = await axios.delete<Note>(

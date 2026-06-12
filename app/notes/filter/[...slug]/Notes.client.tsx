@@ -12,7 +12,7 @@ import SearchBox from "../../../../components/SearchBox/SearchBox";
 import Pagination from "../../../../components/Pagination/Pagination";
 import css from "./NotesPage.module.css";
 
-// Перенесено з ДЗ-6 (06-notehub-nextjs/app/notes/Notes.client.tsx) (адаптовано)
+// Перенесено з ДЗ-6 (адаптовано)
 // Додано пропс tag для фільтрації нотаток за тегом — нова функціональність ДЗ-7
 interface NotesClientProps {
   tag?: string;
@@ -48,7 +48,7 @@ export default function NotesClient({ tag }: NotesClientProps) {
     handleDebouncedSearch(value);
   }
 
-  // Збираємо сторінку нотаток разом 🎬
+  // Збираємо сторінку нотаток разом
   return (
     <main className={css.container}>
       <Toaster position="top-right" />
