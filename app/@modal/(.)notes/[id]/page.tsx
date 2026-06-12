@@ -1,5 +1,5 @@
 import { fetchNoteById } from "../../../../lib/api";
-import NotePreviewModal from "./NotePreviewModal";
+import NotePreviewModal from "./NotePreview.client";
 
 // Ця частина коду взята з конспекту — "Перехоплення маршрутів" (адаптовано)
 // Цей маршрут перехоплює /notes/[id] і показує нотатку в модалці
