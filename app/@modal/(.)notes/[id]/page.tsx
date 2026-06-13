@@ -1,18 +1,31 @@
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 import { fetchNoteById } from "../../../../lib/api";
-import NotePreviewModal from "./NotePreview.client";
+import NotePreviewClient from "./NotePreview.client";
 
 // Ця частина коду взята з конспекту — "Перехоплення маршрутів" (адаптовано)
-// Цей маршрут перехоплює /notes/[id] і показує нотатку в модалці
-// замість повного переходу на окрему сторінку
+// Серверний компонент — prefetch даних нотатки для клієнтського компонента
 type Props = {
   params: Promise<{ id: string }>;
 };
 
 export default async function NotePreviewPage({ params }: Props) {
   const { id } = await params;
+  const queryClient = new QueryClient();
 
-  // Отримуємо дані нотатки на сервері
-  const note = await fetchNoteById(id);
+  // Завантажуємо дані нотатки заздалегідь і зберігаємо у кеш
+  await queryClient.prefetchQuery({
+    queryKey: ["note", id],
+    queryFn: () => fetchNoteById(id),
+  });
 
-  return <NotePreviewModal note={note} />;
+  // Передаємо закешовані дані клієнту через HydrationBoundary
+  return (
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <NotePreviewClient />
+    </HydrationBoundary>
+  );
 }
